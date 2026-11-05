@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://boolu7xa6yjwo"]
+
+[ext_resource type="Script" uid="uid://b5gge83fjileh" path="res://scripts/enemy_puddle.gd" id="1_nopxa"]
+[ext_resource type="Texture2D" uid="uid://bi4rldbme41ub" path="res://assets/pixelPuddle.png" id="2_nopxa"]
+[ext_resource type="AudioStream" uid="uid://d3hfb3my3asbv" path="res://audio/enemyExplode.mp3" id="3_mof61"]
+[ext_resource type="PackedScene" uid="uid://c2idplb6hqghs" path="res://scenes/health_bar.tscn" id="4_466o0"]
+[ext_resource type="AudioStream" uid="uid://bdjhpjgt7olq0" path="res://audio/golfHit.mp3" id="5_2b3kk"]
+[ext_resource type="AudioStream" uid="uid://bl1el874po6y3" path="res://audio/waterSplash.mp3" id="6_hawsv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mof61"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mof61"]
+radius = 8.285714
+height = 20.285713
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_466o0"]
+radius = 8.285714
+height = 20.285713
+
+[node name="enemyPuddle" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_nopxa")
+warning_time = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_nopxa")
+
+[node name="FireTimer" type="Timer" parent="."]
+
+[node name="LaserRoot" type="Node2D" parent="."]
+
+[node name="LaserArea" type="Area2D" parent="LaserRoot"]
+collision_layer = 16
+
+[node name="LaserBeam" type="ColorRect" parent="LaserRoot/LaserArea"]
+offset_left = -51.0
+offset_top = -10.0
+offset_right = -51.0
+scale = Vector2(1, 2)
+color = Color(0.16862746, 0.54509807, 0.68235296, 1)
+
+[node name="LaserCollision" type="CollisionShape2D" parent="LaserRoot/LaserArea"]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_mof61")
+disabled = true
+
+[node name="LaserTimer" type="Timer" parent="LaserRoot/LaserArea"]
+wait_time = 0.5
+
+[node name="ScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(4, 0)
+rotation = 0.31415927
+scale = Vector2(7, 7)
+shape = SubResource("CapsuleShape2D_mof61")
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+position = Vector2(4.000001, 2.3841858e-07)
+rotation = 0.31415927
+scale = Vector2(7, 7)
+shape = SubResource("CapsuleShape2D_466o0")
+disabled = true
+
+[node name="deathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_mof61")
+volume_db = 5.0
+
+[node name="HealthBar" parent="." instance=ExtResource("4_466o0")]
+
+[node name="hitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_2b3kk")
+
+[node name="shootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_hawsv")
+volume_db = 1.0
+
+[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
+[connection signal="timeout" from="LaserRoot/LaserArea/LaserTimer" to="." method="_on_laser_timer_timeout"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

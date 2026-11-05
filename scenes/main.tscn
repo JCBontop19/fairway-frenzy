@@ -1,0 +1,79 @@
+[gd_scene load_steps=20 format=3 uid="uid://6cypfraumpqq"]
+
+[ext_resource type="PackedScene" uid="uid://e5m2ad3b175c" path="res://scenes/player.tscn" id="1_5yvrs"]
+[ext_resource type="Script" uid="uid://cjhvkyfmnv21t" path="res://scripts/main.gd" id="1_epu5r"]
+[ext_resource type="PackedScene" uid="uid://b15mukdyqqj4y" path="res://scenes/enemy_club.tscn" id="3_2wgkp"]
+[ext_resource type="PackedScene" uid="uid://bt8whvlc58b4f" path="res://scenes/game_manager.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://cnxlakmrrmf6a" path="res://scenes/game_over_menu.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://boolu7xa6yjwo" path="res://scenes/enemy_puddle.tscn" id="6_choun"]
+[ext_resource type="PackedScene" uid="uid://c1b17rqlqwfjn" path="res://scenes/pause_menu.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://c6uchlryadqwq" path="res://scenes/enemy_sand.tscn" id="7_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://dt80jexkvk1ai" path="res://scenes/ui_manager.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://shop3salkh2s" path="res://scenes/scrolling_background.tscn" id="8_tipki"]
+[ext_resource type="PackedScene" uid="uid://d0degrvsjrcgr" path="res://scenes/enemy_tee.tscn" id="8_trceg"]
+[ext_resource type="Shader" uid="uid://bfv618ty8d0kf" path="res://scripts/vignette.gdshader" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://b7q6grv1sv152" path="res://scenes/enemy_boss_flag.tscn" id="9_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://ckh3k4vegl1kh" path="res://scenes/pickup.tscn" id="10_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://gfxgtse845pw" path="res://scenes/rapid_pickup.tscn" id="11_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://cmceq0x8yetej" path="res://scenes/win_menu.tscn" id="11_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://pu24ntkwnb8c" path="res://scenes/shield_pickup.tscn" id="12_0ld40"]
+[ext_resource type="AudioStream" uid="uid://cqsw2llp8on0k" path="res://audio/playerDrive.mp3" id="15_jkv2x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
+shader = ExtResource("9_85g3d")
+shader_parameter/radius = 0.70000003325
+shader_parameter/softness = 0.50000002375
+shader_parameter/color = Color(0, 0, 0, 0.4862745)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_epu5r")
+
+[node name="ScrollingBackground" parent="." instance=ExtResource("8_tipki")]
+z_index = -20
+
+[node name="GameManager" parent="." instance=ExtResource("4_jyhfs")]
+player_scene = ExtResource("1_5yvrs")
+enemy_basic_scene = ExtResource("3_2wgkp")
+enemy_fast_scene = ExtResource("3_2wgkp")
+enemy_water_laser_scene = ExtResource("6_choun")
+enemy_sand_scene = ExtResource("7_eb6dy")
+enemy_tee_scene = ExtResource("8_trceg")
+enemy_boss_flag_scene = ExtResource("9_a8y0u")
+health_pickup_scene = ExtResource("10_jbj1t")
+rapid_pickup_scene = ExtResource("11_dp3eg")
+shield_pickup_scene = ExtResource("12_0ld40")
+
+[node name="Vignette" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_choun")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -22.0
+offset_right = 1943.0
+offset_bottom = 1094.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.4)
+
+[node name="UIManager" parent="." instance=ExtResource("7_o6xl0")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_tefeu")]
+process_mode = 2
+visible = false
+z_index = 1
+
+[node name="GameOverMenu" parent="." instance=ExtResource("5_tbgi4")]
+process_mode = 2
+visible = false
+z_index = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="WinMenu" parent="." instance=ExtResource("11_ya4ey")]
+process_mode = 2
+visible = false
+
+[node name="drivingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_jkv2x")
+
+[connection signal="game_over" from="GameManager" to="GameOverMenu" method="_on_game_manager_game_over"]

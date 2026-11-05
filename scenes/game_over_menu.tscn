@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnxlakmrrmf6a"]
+
+[ext_resource type="Script" uid="uid://ca52u2bktexo0" path="res://scripts/game_over_menu.gd" id="1_cpn1u"]
+[ext_resource type="Texture2D" uid="uid://dyv740d2udo32" path="res://assets/gameOverBackground.png" id="2_81acl"]
+[ext_resource type="FontFile" uid="uid://ndldprxa738v" path="res://LuckiestGuy-Regular.ttf" id="2_cwb3k"]
+[ext_resource type="AudioStream" uid="uid://cswvafsp0oebi" path="res://audio/gameOver.mp3" id="4_81acl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ccgoi"]
+font = ExtResource("2_cwb3k")
+font_size = 100
+
+[node name="GameOverMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cpn1u")
+metadata/_edit_vertical_guides_ = [960.0]
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 694.5
+offset_top = 454.5
+offset_right = 1225.5
+offset_bottom = 625.5
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(266.5, 87)
+scale = Vector2(1.25, 1.06)
+texture = ExtResource("2_81acl")
+
+[node name="GameOverLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_ccgoi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="TitleButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Menu"
+
+[node name="GameOver" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_81acl")
+
+[connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TitleButton" to="." method="_on_title_button_pressed"]

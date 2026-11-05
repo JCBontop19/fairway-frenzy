@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://b15mukdyqqj4y"]
+
+[ext_resource type="Script" uid="uid://eyvnmtvvvav5" path="res://scripts/enemy_club.gd" id="1_7m1vs"]
+[ext_resource type="PackedScene" uid="uid://cpc0p5x6fc8dh" path="res://scenes/club_bullet.tscn" id="2_875i7"]
+[ext_resource type="Texture2D" uid="uid://bxae0wpune6m5" path="res://assets/pixelClub.png" id="3_fteus"]
+[ext_resource type="AudioStream" uid="uid://d3hfb3my3asbv" path="res://audio/enemyExplode.mp3" id="4_kwle5"]
+[ext_resource type="PackedScene" uid="uid://c2idplb6hqghs" path="res://scenes/health_bar.tscn" id="5_w8m52"]
+[ext_resource type="AudioStream" uid="uid://bdjhpjgt7olq0" path="res://audio/golfHit.mp3" id="6_bagks"]
+[ext_resource type="AudioStream" uid="uid://x4dhv13kphjv" path="res://audio/enemyShoot.mp3" id="7_ofgrk"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_fteus"]
+points = PackedVector2Array(-2, 43, 8, 43, 18, -6, 26, -67, 30, -79, 38, -79, 40, -73, 36, -54, 22, 16, 18, 39, 24, 52, 21, 65, 14, 69, -13, 69, -19, 63, -19, 54, -17, 44, -11, 40)
+
+[node name="enemyClub" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_7m1vs")
+bullet_scene = ExtResource("2_875i7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_fteus")
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="ScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("ConvexPolygonShape2D_fteus")
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_fteus")
+disabled = true
+
+[node name="HealthBar" parent="." instance=ExtResource("5_w8m52")]
+width = 50.0
+height = 5.0
+y_offset = 80.0
+
+[node name="hitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_bagks")
+
+[node name="deathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_kwle5")
+volume_db = 5.0
+
+[node name="shootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ofgrk")
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

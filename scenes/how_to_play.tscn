@@ -1,0 +1,434 @@
+[gd_scene load_steps=33 format=3 uid="uid://rkq87pk04pk3"]
+
+[ext_resource type="Script" uid="uid://k5ly2hcpdqwm" path="res://scripts/how_to_play.gd" id="1_e0xnd"]
+[ext_resource type="Texture2D" uid="uid://cv5gshemnnyp3" path="res://assets/howtoplayBackground.png" id="2_esfgi"]
+[ext_resource type="FontFile" uid="uid://ndldprxa738v" path="res://LuckiestGuy-Regular.ttf" id="2_wi5qh"]
+[ext_resource type="Texture2D" uid="uid://dv58728jxkwr" path="res://assets/Controls.png" id="4_m8x0n"]
+[ext_resource type="Texture2D" uid="uid://de861roea8bfh" path="res://assets/pixelCart.png" id="4_t2x12"]
+[ext_resource type="Texture2D" uid="uid://bt6sdpmpfrdf6" path="res://assets/pixelBall.png" id="6_esfgi"]
+[ext_resource type="Texture2D" uid="uid://bxae0wpune6m5" path="res://assets/pixelClub.png" id="8_e3seu"]
+[ext_resource type="Texture2D" uid="uid://qfrwl2lwu07l" path="res://assets/pixelBallEnemy.png" id="9_8o3bc"]
+[ext_resource type="Texture2D" uid="uid://bi4rldbme41ub" path="res://assets/pixelPuddle.png" id="10_rxf65"]
+[ext_resource type="Texture2D" uid="uid://d11pvoyldsuxd" path="res://assets/pixelSand.png" id="11_2woeq"]
+[ext_resource type="Texture2D" uid="uid://cabwmsepowy7p" path="res://assets/pixelSandBullet.png" id="12_swued"]
+[ext_resource type="Texture2D" uid="uid://cubd78xd4lnbx" path="res://assets/pixelTee.png" id="13_bhlba"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_crhno"]
+font = ExtResource("2_wi5qh")
+font_size = 150
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xqkvd"]
+line_spacing = 10.0
+font = ExtResource("2_wi5qh")
+font_size = 35
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2x12"]
+atlas = ExtResource("4_t2x12")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oityv"]
+atlas = ExtResource("4_t2x12")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cyrb"]
+atlas = ExtResource("4_t2x12")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3seu"]
+atlas = ExtResource("4_t2x12")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8o3bc"]
+atlas = ExtResource("4_t2x12")
+region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rxf65"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2x12")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oityv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cyrb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3seu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8o3bc")
+}],
+"loop": true,
+"name": &"colors",
+"speed": 1.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dhu30"]
+font = ExtResource("2_wi5qh")
+font_size = 30
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2woeq"]
+atlas = ExtResource("6_esfgi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swued"]
+atlas = ExtResource("6_esfgi")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhlba"]
+atlas = ExtResource("6_esfgi")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0nfl"]
+atlas = ExtResource("6_esfgi")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nlg1"]
+atlas = ExtResource("6_esfgi")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jfkb7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2woeq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swued")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhlba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0nfl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nlg1")
+}],
+"loop": true,
+"name": &"colors",
+"speed": 1.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e3seu"]
+font = ExtResource("2_wi5qh")
+font_size = 150
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_oityv"]
+font = ExtResource("2_wi5qh")
+font_size = 30
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3cyrb"]
+font = ExtResource("2_wi5qh")
+font_size = 30
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8o3bc"]
+font = ExtResource("2_wi5qh")
+font_size = 30
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_esfgi"]
+font = ExtResource("2_wi5qh")
+font_size = 30
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="HowToPlay" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_e0xnd")
+
+[node name="Panel1" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BackgroundSprite" type="Sprite2D" parent="Panel1"]
+position = Vector2(960, 540)
+scale = Vector2(1.25, 1.06)
+texture = ExtResource("2_esfgi")
+
+[node name="HTPLabel" type="Label" parent="Panel1"]
+layout_mode = 0
+offset_left = 515.0
+offset_top = 37.0
+offset_right = 1405.0
+offset_bottom = 188.0
+text = "How To Play"
+label_settings = SubResource("LabelSettings_crhno")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InstructionsLabel" type="Label" parent="Panel1"]
+layout_mode = 0
+offset_left = 377.5
+offset_top = 200.0
+offset_right = 1542.5
+offset_bottom = 972.0
+text = "Drive the cart and dodge the incoming projectiles.
+Movment allows you to attack back at the enemies.
+
+Dealing damage charges your Ultimate bar.
+Pressing 'Space' will launch a driver shot that deals more damage.
+
+You have three sets of lives: Par 3, Par 4, Par 5.  
+Each life gives a specific amount of health:
+
+Par 3 = 3 Hits
+Par 4 = 4 Hits
+Par 5 = 5 Hits
+
+For each life you lose, you will gain less score: 
+
+Par 3 = 100%
+Par 4 = 75%
+Par 5 = 50%"
+label_settings = SubResource("LabelSettings_xqkvd")
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="Panel1"]
+position = Vector2(243.6, 473)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_rxf65")
+animation = &"colors"
+frame_progress = 0.8639618
+
+[node name="ControlsSprite" type="Sprite2D" parent="Panel1"]
+position = Vector2(243.60007, 688.0001)
+scale = Vector2(4, 4)
+texture = ExtResource("4_m8x0n")
+
+[node name="ControlsLabel" type="Label" parent="Panel1"]
+layout_mode = 0
+offset_left = 175.60004
+offset_top = 363.0
+offset_right = 312.60004
+offset_bottom = 598.0
+text = "Player
+
+
+
+
+
+Controls"
+label_settings = SubResource("LabelSettings_dhu30")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BulletSprite" type="AnimatedSprite2D" parent="Panel1"]
+position = Vector2(410, 473)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_jfkb7")
+animation = &"colors"
+frame_progress = 0.5421163
+
+[node name="NextButton" type="Button" parent="Panel1"]
+layout_mode = 0
+offset_left = 1785.0
+offset_top = 987.0
+offset_right = 1830.0
+offset_bottom = 1018.0
+scale = Vector2(3, 3)
+text = "Next"
+
+[node name="BackButton" type="Button" parent="Panel1"]
+layout_mode = 0
+offset_top = 987.0
+offset_right = 45.0
+offset_bottom = 1018.0
+scale = Vector2(3, 3)
+text = "Back"
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1920.0
+offset_right = 1960.0
+offset_bottom = 40.0
+
+[node name="BackgroundSprite" type="Sprite2D" parent="Panel2"]
+position = Vector2(960, 540)
+scale = Vector2(1.25, 1.06)
+texture = ExtResource("2_esfgi")
+
+[node name="EnemiesLabel" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 660.0
+offset_top = 37.0
+offset_right = 1260.0
+offset_bottom = 188.0
+text = "Enemies"
+label_settings = SubResource("LabelSettings_e3seu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClubSprite" type="Sprite2D" parent="Panel2"]
+position = Vector2(240, 390)
+scale = Vector2(3, 3)
+texture = ExtResource("8_e3seu")
+
+[node name="ClubBullet" type="Sprite2D" parent="Panel2"]
+position = Vector2(240, 700)
+scale = Vector2(3, 3)
+texture = ExtResource("9_8o3bc")
+
+[node name="ClubLabel" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 141.5
+offset_top = 260.0
+offset_right = 338.5
+offset_bottom = 631.0
+text = "Club
+
+
+
+
+
+
+Health: 3
+
+Attack:
+Single Bullet"
+label_settings = SubResource("LabelSettings_oityv")
+horizontal_alignment = 1
+
+[node name="PuddleSprite" type="Sprite2D" parent="Panel2"]
+position = Vector2(720, 390)
+scale = Vector2(3, 3)
+texture = ExtResource("10_rxf65")
+
+[node name="PuddleLaser" type="ColorRect" parent="Panel2"]
+layout_mode = 0
+offset_left = 670.0
+offset_top = 680.0
+offset_right = 770.0
+offset_bottom = 720.0
+color = Color(0.16862746, 0.54509807, 0.68235296, 1)
+
+[node name="PuddleLabel" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 655.0
+offset_top = 260.0
+offset_right = 785.0
+offset_bottom = 631.0
+text = "Puddle
+
+
+
+
+
+
+Health: 5
+
+Attack:
+Lazer"
+label_settings = SubResource("LabelSettings_3cyrb")
+horizontal_alignment = 1
+
+[node name="SandSprite" type="Sprite2D" parent="Panel2"]
+position = Vector2(1200, 390)
+scale = Vector2(3, 3)
+texture = ExtResource("11_2woeq")
+
+[node name="SandBullet" type="Sprite2D" parent="Panel2"]
+position = Vector2(1200, 700)
+scale = Vector2(3, 3)
+texture = ExtResource("12_swued")
+
+[node name="SandBullet2" type="Sprite2D" parent="Panel2"]
+position = Vector2(1200, 775)
+scale = Vector2(3, 3)
+texture = ExtResource("12_swued")
+
+[node name="SandBullet3" type="Sprite2D" parent="Panel2"]
+position = Vector2(1200, 850)
+scale = Vector2(3, 3)
+texture = ExtResource("12_swued")
+
+[node name="SandLabel" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 1105.5
+offset_top = 260.0
+offset_right = 1294.5
+offset_bottom = 631.0
+text = "Sand
+
+
+
+
+
+
+Health: 7
+
+Attack:
+Bullet Burst"
+label_settings = SubResource("LabelSettings_8o3bc")
+horizontal_alignment = 1
+
+[node name="TeeSprite" type="Sprite2D" parent="Panel2"]
+position = Vector2(1680, 390)
+rotation = -1.5707964
+scale = Vector2(3, 3)
+texture = ExtResource("13_bhlba")
+
+[node name="TeeSprite2" type="Sprite2D" parent="Panel2"]
+position = Vector2(1680, 700)
+scale = Vector2(3, 3)
+texture = ExtResource("13_bhlba")
+
+[node name="TeeLabel" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 1608.0
+offset_top = 260.0
+offset_right = 1752.0
+offset_bottom = 631.0
+text = "Tee
+
+
+
+
+
+
+Health: 10
+
+Attack:
+Dash"
+label_settings = SubResource("LabelSettings_esfgi")
+horizontal_alignment = 1
+
+[node name="BackButton2" type="Button" parent="Panel2"]
+layout_mode = 0
+offset_top = 987.0
+offset_right = 45.0
+offset_bottom = 1018.0
+scale = Vector2(3, 3)
+text = "Back"
+
+[connection signal="pressed" from="Panel1/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="Panel1/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Panel2/BackButton2" to="." method="_on_back_button_2_pressed"]

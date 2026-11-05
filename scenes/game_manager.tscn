@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt8whvlc58b4f"]
+
+[ext_resource type="Script" uid="uid://mtl1y7uu4724" path="res://scripts/game_manager.gd" id="1_twevn"]
+[ext_resource type="AudioStream" uid="uid://bphht7ut6h0v4" path="res://audio/playerExplode.mp3" id="2_glms7"]
+[ext_resource type="AudioStream" uid="uid://d3hfb3my3asbv" path="res://audio/enemyExplode.mp3" id="2_udu3i"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_twevn")
+
+[node name="enemyDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_udu3i")
+volume_db = 5.0
+
+[node name="nextLife" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_glms7")
+volume_db = 10.0

@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=3 uid="uid://cuhg163qhhj2m"]
+
+[ext_resource type="Script" uid="uid://b2xmyg2rn2b4m" path="res://scripts/title_menu.gd" id="1_iilg2"]
+[ext_resource type="Texture2D" uid="uid://d28ctddxs6y00" path="res://assets/menuBackground.png" id="2_brrgq"]
+[ext_resource type="Texture2D" uid="uid://dkkiit1ofbipk" path="res://assets/teeOff.png" id="3_6gi7b"]
+[ext_resource type="FontFile" uid="uid://ndldprxa738v" path="res://LuckiestGuy-Regular.ttf" id="4_6gi7b"]
+[ext_resource type="Texture2D" uid="uid://coivm05fvym68" path="res://assets/Exit.png" id="5_brrgq"]
+[ext_resource type="Texture2D" uid="uid://bnmy2auq8kgdk" path="res://assets/Help.png" id="6_qx5l0"]
+[ext_resource type="AudioStream" uid="uid://cwtwvwkle0vwj" path="res://audio/menuMusic.mp3" id="7_brrgq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_brrgq"]
+font = ExtResource("4_6gi7b")
+font_size = 150
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[node name="TitleMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_iilg2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel"]
+position = Vector2(960, 540)
+scale = Vector2(1.25, 1.06)
+texture = ExtResource("2_brrgq")
+
+[node name="StartButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 641.5
+offset_top = 675.0
+offset_right = 1551.5
+offset_bottom = 1035.0
+scale = Vector2(0.7, 0.7)
+icon = ExtResource("3_6gi7b")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 693.0
+offset_top = 66.0
+offset_right = 1833.0
+offset_bottom = 217.0
+text = "Fairway Frenzy"
+label_settings = SubResource("LabelSettings_brrgq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 1278.0
+offset_top = 875.0
+offset_right = 2188.0
+offset_bottom = 1235.0
+scale = Vector2(0.4, 0.4)
+icon = ExtResource("5_brrgq")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="HTPButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 875.0
+offset_right = 1188.0
+offset_bottom = 1235.0
+scale = Vector2(0.4, 0.4)
+icon = ExtResource("6_qx5l0")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CreditsButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Credits"
+
+[node name="TitleMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_brrgq")
+
+[connection signal="pressed" from="Panel/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Panel/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Panel/HTPButton" to="." method="_on_htp_button_pressed"]
+[connection signal="pressed" from="Panel/CreditsButton" to="." method="_on_credits_button_pressed"]

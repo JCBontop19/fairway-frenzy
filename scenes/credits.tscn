@@ -1,0 +1,135 @@
+[gd_scene load_steps=10 format=3 uid="uid://b7uaqdxd66jas"]
+
+[ext_resource type="Texture2D" uid="uid://cib8u2v5n1ri" path="res://assets/Background (2).png" id="1_0bpdh"]
+[ext_resource type="Script" uid="uid://b6lbcimreg662" path="res://scripts/credits.gd" id="1_0ctdu"]
+[ext_resource type="FontFile" uid="uid://ndldprxa738v" path="res://LuckiestGuy-Regular.ttf" id="2_2ckv8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0ctdu"]
+font = ExtResource("2_2ckv8")
+font_size = 100
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2fbfq"]
+font = ExtResource("2_2ckv8")
+font_size = 50
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8gwij"]
+font = ExtResource("2_2ckv8")
+font_size = 50
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mah5v"]
+font = ExtResource("2_2ckv8")
+font_size = 25
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kyhnv"]
+font = ExtResource("2_2ckv8")
+font_size = 50
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ooihk"]
+font = ExtResource("2_2ckv8")
+font_size = 25
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ctdu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.25, 1.0537109)
+texture = ExtResource("1_0bpdh")
+centered = false
+
+[node name="titleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 580.0
+offset_top = 489.5
+offset_right = 1340.0
+offset_bottom = 590.5
+text = "Fairway Frenzy"
+label_settings = SubResource("LabelSettings_0ctdu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="creatorLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 685.0
+offset_top = 600.0
+offset_right = 1185.0
+offset_bottom = 655.0
+text = "Made by: Jacob Davis"
+label_settings = SubResource("LabelSettings_2fbfq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="musicLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 100.0
+offset_right = 348.0
+offset_bottom = 151.0
+text = "Music & Sound"
+label_settings = SubResource("LabelSettings_8gwij")
+
+[node name="artistLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 109.5
+offset_top = 150.0
+offset_right = 389.5
+offset_bottom = 292.0
+text = "Pixabay:
+floraphonic
+freesound_community
+Lesiakower
+Abdalrahman_bm
+u_b32baquv5u"
+label_settings = SubResource("LabelSettings_mah5v")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="artLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1537.0
+offset_top = 100.0
+offset_right = 1840.0
+offset_bottom = 151.0
+text = "Art & Design"
+label_settings = SubResource("LabelSettings_kyhnv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="desigerLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1618.5
+offset_top = 150.0
+offset_right = 1758.5
+offset_bottom = 205.0
+text = "Aseprite:
+Jacob Davis"
+label_settings = SubResource("LabelSettings_ooihk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_top = 987.0
+offset_right = 45.0
+offset_bottom = 1018.0
+scale = Vector2(3, 3)
+text = "Back"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

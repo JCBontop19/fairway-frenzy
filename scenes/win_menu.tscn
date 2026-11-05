@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmceq0x8yetej"]
+
+[ext_resource type="Script" uid="uid://c2h6s6swmrvq1" path="res://scripts/win_menu.gd" id="1_ki55t"]
+[ext_resource type="Texture2D" uid="uid://dkyhhjpqo1ufq" path="res://assets/winBackground.png" id="2_7shsi"]
+[ext_resource type="FontFile" uid="uid://ndldprxa738v" path="res://LuckiestGuy-Regular.ttf" id="2_jx1is"]
+[ext_resource type="AudioStream" uid="uid://bjtw5e75v1rd1" path="res://audio/winMusic.mp3" id="4_dmaew"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7shsi"]
+font = ExtResource("2_jx1is")
+font_size = 50
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dmaew"]
+font = ExtResource("2_jx1is")
+font_size = 25
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="WinMenu" type="CanvasLayer"]
+script = ExtResource("1_ki55t")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 480.0
+offset_top = 270.0
+offset_right = 1440.0
+offset_bottom = 810.0
+color = Color(0, 0, 0, 0.49803922)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.250651, 1.0537109)
+texture = ExtResource("2_7shsi")
+centered = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -217.5
+offset_top = -75.5
+offset_right = 217.5
+offset_bottom = 75.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="CongratsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Congratulations!"
+label_settings = SubResource("LabelSettings_7shsi")
+
+[node name="ScoreLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Score: "
+label_settings = SubResource("LabelSettings_dmaew")
+
+[node name="RestartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="MenuButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Menu"
+
+[node name="winMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dmaew")
+volume_db = 10.0
+
+[connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

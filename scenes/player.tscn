@@ -1,0 +1,94 @@
+[gd_scene load_steps=15 format=3 uid="uid://e5m2ad3b175c"]
+
+[ext_resource type="Script" uid="uid://dlx31qekdi3yc" path="res://scripts/player.gd" id="1_cnd83"]
+[ext_resource type="PackedScene" uid="uid://bk73rgs2kdfnp" path="res://scenes/bullet.tscn" id="2_e3kkl"]
+[ext_resource type="PackedScene" uid="uid://b7jaamrc28hao" path="res://scenes/heavy_bullet.tscn" id="3_fjrip"]
+[ext_resource type="Texture2D" uid="uid://de861roea8bfh" path="res://assets/pixelCart.png" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://ve6a3dk72r0m" path="res://audio/golfSwing.mp3" id="5_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://dmdbpbymr7yir" path="res://audio/playerHit.mp3" id="5_tuyoq"]
+[ext_resource type="PackedScene" uid="uid://c2idplb6hqghs" path="res://scenes/health_bar.tscn" id="6_tuyoq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xgebf"]
+size = Vector2(17.27592, 20.659897)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("3_qhqgy")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("3_qhqgy")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("3_qhqgy")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("3_qhqgy")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("3_qhqgy")
+region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d2wvv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}],
+"loop": true,
+"name": &"colors",
+"speed": 0.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 24
+script = ExtResource("1_cnd83")
+bullet_scene = ExtResource("2_e3kkl")
+heavy_bullet_scene = ExtResource("3_fjrip")
+heavy_fire_rate = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.21660149, -1.2999986)
+scale = Vector2(7.55, 3.94)
+shape = SubResource("RectangleShape2D_xgebf")
+
+[node name="swingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_qlg0r")
+
+[node name="hitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_tuyoq")
+
+[node name="HealthBar" parent="." instance=ExtResource("6_tuyoq")]
+width = 100.0
+height = 15.0
+y_offset = 70.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.3, 2.3)
+sprite_frames = SubResource("SpriteFrames_d2wvv")
+animation = &"colors"
+
+[node name="UltBar" parent="." instance=ExtResource("6_tuyoq")]
+width = 100.0
+height = 15.0
+y_offset = 80.0
+bar_color = Color(0, 0.7176471, 1, 1)

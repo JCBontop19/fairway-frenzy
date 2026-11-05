@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7q6grv1sv152"]
+
+[ext_resource type="Script" uid="uid://sp1utilpiub4" path="res://scripts/enemy_boss_flag.gd" id="1_ivup1"]
+[ext_resource type="PackedScene" uid="uid://cpc0p5x6fc8dh" path="res://scenes/club_bullet.tscn" id="2_b1xkl"]
+[ext_resource type="Texture2D" uid="uid://cjfkgcp37fbkm" path="res://assets/pixelBoss.png" id="3_rnt43"]
+[ext_resource type="AudioStream" uid="uid://d3hfb3my3asbv" path="res://audio/enemyExplode.mp3" id="4_sp73p"]
+[ext_resource type="PackedScene" uid="uid://c2idplb6hqghs" path="res://scenes/health_bar.tscn" id="5_3xndq"]
+[ext_resource type="AudioStream" uid="uid://bdjhpjgt7olq0" path="res://audio/golfHit.mp3" id="6_ysvon"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_rnt43"]
+points = PackedVector2Array(-78, -211, -71, -204, 44, -160, -68, -119, -66, -32, 11, -42, 153, 13, 202, 112, 151, 229, 57, 277, -56, 275, -123, 249, -172, 205, -199, 156, -197, 77, -179, 42, -137, 1, -87, -26, -87, -184, -87, -201)
+
+[node name="EnemyBossFlag" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(0.75, 0.75)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_ivup1")
+ball_scene = ExtResource("2_b1xkl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_rnt43")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("ConvexPolygonShape2D_rnt43")
+
+[node name="ScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="PhaseTimer" type="Timer" parent="."]
+
+[node name="SlashArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="SlashCollision" type="CollisionShape2D" parent="SlashArea"]
+shape = SubResource("ConvexPolygonShape2D_rnt43")
+
+[node name="BallSpawnPoint" type="Node2D" parent="."]
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_rnt43")
+disabled = true
+
+[node name="deathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_sp73p")
+volume_db = 5.0
+
+[node name="HealthBar" parent="." instance=ExtResource("5_3xndq")]
+width = 200.0
+height = 15.0
+y_offset = 300.0
+max_value = 100.0
+current_value = 100.0
+
+[node name="hitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ysvon")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="PhaseTimer" to="." method="_on_phase_timer_timeout"]
+[connection signal="body_entered" from="SlashArea" to="." method="_on_slash_area_body_entered"]

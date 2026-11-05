@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://gfxgtse845pw"]
+
+[ext_resource type="Script" uid="uid://t0h0o405i06y" path="res://scripts/pickup.gd" id="1_lhj03"]
+[ext_resource type="Texture2D" uid="uid://bsh4b6tsj1qup" path="res://assets/rapidPickup.png" id="2_lhj03"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_gyxxy"]
+points = PackedVector2Array(-1, 11, -6, 6, -9, 8, -12, 6, -12, 3, -1, -8, 0, -9, 2, -11, 6, -11, 12, -5, 12, 0, 1, 11)
+
+[node name="Pickup" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_lhj03")
+type = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_lhj03")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_gyxxy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

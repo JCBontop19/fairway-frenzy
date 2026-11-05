@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0degrvsjrcgr"]
+
+[ext_resource type="Script" uid="uid://de2er5iiarswh" path="res://scripts/enemy_tee.gd" id="1_m6jwc"]
+[ext_resource type="Texture2D" uid="uid://cubd78xd4lnbx" path="res://assets/pixelTee.png" id="2_m6jwc"]
+[ext_resource type="AudioStream" uid="uid://d3hfb3my3asbv" path="res://audio/enemyExplode.mp3" id="3_jggsc"]
+[ext_resource type="PackedScene" uid="uid://c2idplb6hqghs" path="res://scenes/health_bar.tscn" id="4_q2mto"]
+[ext_resource type="AudioStream" uid="uid://bdjhpjgt7olq0" path="res://audio/golfHit.mp3" id="5_yfu4n"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_m6jwc"]
+points = PackedVector2Array(-128, -4, -101, -10, 32, -11, 39, -16, 75, -15, 86, -38, 98, -53, 114, -62, 127, -41, 126, 43, 122, 58, 112, 65, 100, 57, 88, 44, 74, 16, 38, 16, 32, 12, -101, 12, -128, 7)
+
+[node name="enemyTee" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_m6jwc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_m6jwc")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox" groups=["enemy"]]
+position = Vector2(0, -1)
+shape = SubResource("ConvexPolygonShape2D_m6jwc")
+
+[node name="ScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="WindupTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("ConvexPolygonShape2D_m6jwc")
+disabled = true
+
+[node name="HealthBar" parent="." instance=ExtResource("4_q2mto")]
+
+[node name="hitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_yfu4n")
+
+[node name="deathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jggsc")
+volume_db = 5.0
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="WindupTimer" to="." method="_on_windup_timer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
